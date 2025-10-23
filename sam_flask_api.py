@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Set PYTHONPATH and environment
-os.environ['PYTHONPATH'] = '/content/SAM:' + os.environ.get('PYTHONPATH', '')
+os.environ['PYTHONPATH'] = '/content/Futura_Face:' + os.environ.get('PYTHONPATH', '')
 os.environ['TORCH_CUDA_ARCH_LIST'] = '7.5'  # For T4 GPU
 sys.path.insert(0, '/content/SAM')
 
@@ -52,7 +52,7 @@ def upload_image():
 
     # Run SAM inference
     cmd = f"""
-    PYTHONPATH=/content/SAM python scripts/inference.py \
+    PYTHONPATH=/content/Futura_Face python scripts/inference.py \
       --exp_dir=pretrained_models \
       --checkpoint_path=pretrained_models/sam_ffhq_aging.pt \
       --data_path=inference_results/input \
@@ -79,4 +79,5 @@ def upload_image():
     return jsonify({'error': f'No output image found for age {target_age}'}), 404
 
 if __name__ == '__main__':
+
     app.run(host='0.0.0.0', port=5000, debug=True)
